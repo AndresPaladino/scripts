@@ -30,6 +30,7 @@ elif platform == "win32":
     pdfdir = r"D:\DESCARGAS\pdf"
     restdir = r"D:\DESCARGAS\rest"
     samplesdir = r"E:\otros\PROYECTOS\Musica\ALL MY SOUNDS\DRUM KITS\SAMPLES"
+
 def move(file,dest,name):
     if os.path.exists(dest + slash + name):
         os.remove(dest + slash + name)
@@ -54,7 +55,7 @@ class MoveHandler(FileSystemEventHandler):
                     elif name.endswith(".pdf"):
                         destination = pdfdir
                         move(file,destination,name)
-                    elif name.endswith((".zip",".rar")):
+                    elif name.endswith((".zip",".rar",".tar.gz")):
                         destination = zipdir
                         move(file,destination,name)
                     elif name.endswith((".mp4",".mov")):
@@ -70,7 +71,7 @@ class MoveHandler(FileSystemEventHandler):
 if __name__ == "__main__":
     event_handler = MoveHandler()
     observer = Observer()
-    observer.schedule(event_handler, path=downloadsdir, recursive=True)
+    observer.schedule(event_handler, path=downloadsdir, recursive=False)
     observer.start()
 
     try:
